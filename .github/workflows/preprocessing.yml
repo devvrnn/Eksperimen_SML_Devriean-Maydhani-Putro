@@ -1,1 +1,44 @@
+name: Automated Data Preprocessing
 
+on:
+  push:
+    paths:
+      - 'dataset_raw/**'
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  preprocess:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas numpy scikit-learn matplotlib seaborn joblib
+    
+    - name: Run preprocessing
+      run: |
+        cd preprocessing
+        python automate_Nama-siswa.py --input ../dataset_raw/iris.csv --output dataset_preprocessing --target species
+    
+    - name: Upload preprocessed data
+      uses: actions/upload-artifact@v3
+      with:
+        name: preprocessed-data
+        path: preprocessing/dataset_preprocessing/
+    
+    - name: Commit and push if changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add preprocessing/dataset_preprocessing/
+        git commit -m "Auto-update preprocessed data" || echo "No changes to commit"
+        git push || echo "No changes to push"
