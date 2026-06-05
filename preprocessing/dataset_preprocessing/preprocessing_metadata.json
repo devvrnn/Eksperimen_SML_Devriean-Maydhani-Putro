@@ -1,0 +1,22 @@
+{
+  "original_shape": [
+    150,
+    6
+  ],
+  "preprocessed_shape": [
+    150,
+    6
+  ],
+  "numeric_columns": [
+    "Id",
+    "SepalLengthCm",
+    "SepalWidthCm",
+    "PetalLengthCm",
+    "PetalWidthCm"
+  ],
+  "categorical_columns": [
+    "Species"
+  ],
+  "has_target": false,
+  "target_column": null
+}
