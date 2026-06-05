@@ -27,7 +27,7 @@ jobs:
     - name: Run preprocessing
       run: |
         cd preprocessing
-        python automate_Nama-siswa.py --input ../dataset_raw/iris.csv --output dataset_preprocessing --target species
+        python automate_Devriean-Maydhani-Putro.py --input ../dataset_raw/iris.csv --output dataset_preprocessing --target species
     
     - name: Upload preprocessed data
       uses: actions/upload-artifact@v4  # <-- DIUBAH DARI v3 KE v4 (SOLUSI ERROR)
